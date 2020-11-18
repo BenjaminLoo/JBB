@@ -1,0 +1,67 @@
+/*
+
+Name: Teo Kai Jie
+Class: DIT/2B/21
+Date: 16/5/20
+Admission Number: 1936799
+Filename: index.css
+
+*/
+@font-face {
+    src:url(./fonts/OpenSans.ttf);
+    font-family:OpenSans;
+}
+body {
+    background:rgb(156, 202, 255);
+    font-family:OpenSans;
+}
+nav.navbar {
+    color:white;
+    background:rgb(56, 88, 156);
+    padding:0;
+}
+nav ul {
+    /* background:rgb(71, 107, 184); */
+    padding:1%;
+    margin:0;
+    text-align:center;
+}
+header {
+    text-align:center;
+    z-index:0;
+    position:relative;
+    padding:12%;
+    background: url(../img/bg.jpg) center center;
+    background-size: 100%;
+    color:white;
+    text-shadow: 4px 4px 4px black;
+    border-bottom:4px solid rgb(96, 136, 224);
+    z-index:1;
+}
+header h1 {
+    font-size:60px;
+}
+
+div#overlay {
+    background:rgba(0,0,0,0.5);
+    position:absolute;
+    z-index:-1;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+canvas#particleCanvas {
+    z-index:-1;
+    left:0;
+    top:0;
+    position:absolute;
+}
+section {
+    text-align:center;
+    padding:5%;
+}
+footer {
+    text-align:center;
+    padding:1%;
+}

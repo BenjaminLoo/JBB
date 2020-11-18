@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <!-- 
+        Name: Teo Kai Jie
+        Class: DIT/2B/21
+        Date: 16/5/20
+        Admission Number: 1936799
+        Filename: viewer.html
+     -->
+    <head>
+        <title>Table Viewer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="./css/viewer.css"/>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid" style="margin:0;">
+                <div class="navbar-header">
+                    <a href="./index.html" class="text-light navbar-brand">JiBaBOOM!</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a class="text-light" href="./viewer.html">View Choices</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Header -->
+        <header>
+            <div id="overlay"></div>
+            <h1>Find your preferred choice in <br><strong>⚡ lightning ⚡</strong> speed!</h1>
+            <h3>Your most successful choice will be computed in <strong>seconds</strong>!</h3>
+        </header>
+        <!-- Main container -->
+        <main class="container">
+            <!-- Page size -->
+            <h3>Page size:</h3>
+                <button id="decreaseFontSize" style="font-size:12px;width:42px;height:40px;text-align:center;" class="btn btn-info">-A</button>
+                <button id="increaseFontSize" style="font-size:15px;width:42px;height:40px;text-align:center;" class="btn btn-info">+A</button>
+            <div id="instructions">
+                <p>Use the the filters below to select your best choice!</p>
+            </div>
+            <hr>
+            <!-- The nav tabs to alter between data and result viewer -->
+            <ul class="nav nav-tabs">
+                <!-- Data viewer - default page -->
+                <li class="nav-item active">
+                    <a href="#data" data-toggle="tab" class="nav-link active">Data</a>
+                </li>
+                <!-- Result viewer -->
+                <li class="nav-item">
+                    <a href="#result" data-toggle="tab" class="nav-link">Result</a>
+                </li>
+            </ul>
+            <!-- Data Viewer Div -->
+            <div class="tab-content">
+                <div id="data" class="container-fluid tab-pane active">
+                    <h1>Data Viewer</h1>
+                    <!-- The form to compute the results -->
+                    <form action="">
+                        <div class="form-group">
+                            <label for="computationOption">Computation Option:</label>
+                            <br>
+                            <input id="computationOptionData" data-on="Basic" data-off="Advance" data-offstyle="info" data-onstyle="success" class="form-control" type="checkbox" checked data-toggle="toggle">
+                        </div>
+                        <div class="form-group">
+                            <!-- Company id -->
+                            <div>
+                                <label for="companyId">Company Id:</label>
+                                <input autocomplete="off" class="form-control" placeholder="Company Id" type="text" name="" id="companyInput">
+                            </div>
+                        </div>
+                        <!-- Audience Count Range Slider -->
+                        <div class="form-group">
+                            <label for="Audience Count Slider">Audience Count Range</label>
+                            <div id="audienceCountSlider"></div>
+                            <div style="font-weight:900;" id="audienceCountRange"></div>
+                        </div>
+                        <!-- Cost Range Slider -->
+                        <div id="costSliderGroup" class="form-group">
+                            <label for="Cost Slider">Cost Range</label>
+                            <div id="costSlider"></div>
+                            <div style="font-weight:900;" id="costRange"></div>
+                        </div>
+                    </form>
+                    <!-- The table section! -->
+                    <div id="dataTable">
+                        <!-- Update results button -->
+                        <input value="Update Results" class="form-control btn bg-success text-light" id="updateResults" type="submit" value="">
+                        <hr>
+                        <strong>Show</strong>
+                        <!-- Entries selection -->
+                        <select style="width:80px;margin:1%;padding:1%;" id="noOfEntries">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <strong>entries</strong>
+                        <!-- Loading spinner - to let the user know that the page is loading -->
+                        <div style="text-align:center;" id="loadingOverlay">
+                            <img id="loadingSpinner" src="./img/loading.png" alt="spinnerImg"/>
+                            <h4>Please wait a moment...</h4>
+                        </div>
+                        <!-- The official table! -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Option ID</th>
+                                    <th>Company ID</th>
+                                    <th>Audience Count</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <!-- This to be shown when there are no results -->
+                            <tbody id="dataTable">
+                                <tr>
+                                    <td style="text-align:center;" colspan="4">No Results Found - Click on the 'Update Results' button to update</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p id="totalEntriesNo">Total Entries: 0</p>
+                        <!-- The pagination tool! -->
+                        <ul id="paginateLinks" class="pagination">
+                            <li id="prevBtn" data-value="prev" class="page-item">
+                                <a class="page-link">Prev</a>
+                            </li>
+                            <li id="nextBtn" data-value="next" class="page-item">
+                                <a class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Result viewer -->
+                <div id="result" class="container-fluid tab-pane fade">
+                    <h1>Result Viewer</h1>
+                    <!-- Form used for computation -->
+                    <form action="" id="resultForm">
+                        <div class="form-group">
+                            <label for="computationOption">Computation Option:</label>
+                            <br>
+                            <input id="computationOptionResult" data-on="Basic" data-off="Advance" data-offstyle="info" data-onstyle="success" class="form-control" type="checkbox" checked data-toggle="toggle">
+                        </div>
+                        <!-- Option Id list -->
+                        <div class="form-group" id="optionIdList">
+                            <div id="optionIds">
+                                <div class="row optionId">
+                                    <div class="col-9">
+                                        <input class="form-control optionIdText" type="text">
+                                    </div>
+                                    <div class="col-3">
+                                        <input placeholder="Enter option id" data-optionId="1" value="Delete" class="form-control btn btn-danger" type="button">
+                                    </div>
+                                </div>
+                                <div class="row optionId">
+                                    <div class="col-9">
+                                        <input class="form-control optionIdText" type="text">
+                                    </div>
+                                    <div class="col-3">
+                                        <input data-optionId="2" value="Delete" class="form-control btn btn-danger" type="button">
+                                    </div>
+                                </div>
+                            </div>
+                            <input value="Add Option Id" type="button" onclick="addOptionId()" class="form-control btn btn-info">
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget:</label>
+                            <input class="form-control" type="text" id="budget">
+                        </div>
+                        <div class="form-group">
+                            <input id="computeResult" type="submit" value="Compute Result" class="form-control btn btn-success">
+                        </div>
+                    </form>
+                    <!-- Output table -->
+                    <h1>Output table</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Option Id</th>
+                                <th>Amount</th>
+                                <th>Audience Reached</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultTable">
+                            <!-- <tr>
+                                <td style="text-align:center;" colspan="4">No Results Found - Click on the 'Update Results' button to update</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <h1>Output graph</h1>
+                    <h3 id="resultMsg"></h3>
+                    <!-- Amount Graph -->
+                    <div id="graph_div_amount">
+                        
+                    </div>
+                    <!-- Audience Reached Graph -->
+                    <div id="graph_div_audienceReached">
+                        
+                    </div>
+                    <!-- Area Chart Graph -->
+                    <div id="graph_div_areachart">
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="footer bg-dark text-light">
+            <h4>&copy; 2020 All Rights Reserved</h4>
+        </footer>
+        <script src="./js/script.js"></script>
+        <script src="./js/resultViewer.js"></script>
+        <script>
+            
+        </script>
+    </body>
+</html>

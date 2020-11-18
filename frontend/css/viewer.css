@@ -1,0 +1,102 @@
+/*
+
+Name: Teo Kai Jie
+Class: DIT/2B/21
+Date: 16/5/20
+Admission Number: 1936799
+Filename: viewer.css
+
+*/
+@font-face {
+    src:url(./fonts/OpenSans.ttf);
+    font-family:OpenSans;
+}
+body {
+    background-color:rgb(156, 202, 255);
+    font-family: OpenSans;
+    font: weight 100;
+}
+header {
+    text-align:center;
+    z-index:0;
+    position:relative;
+    padding:12%;
+    background: url(../img/bg.jpg) center center;
+    background-size: 100%;
+    color:white;
+    text-shadow: 4px 4px 4px black;
+    border-bottom:4px solid rgb(96, 136, 224);
+    z-index:1;
+}
+header h1 {
+    font-size:60px;
+}
+main {
+    padding:10px;
+    /* border:2px solid black; */
+}
+form {
+    padding:10px;
+}
+table#table {
+    border-collapse:collapse;
+    /* border:2px solid maroon; */
+}
+table,tr,td,th {
+    border-bottom:1px solid grey;
+}
+thead {
+    background:#171b42;
+    color:white;
+}
+tbody#dataTable, tbody#resultTable {
+    background:#bfdaec;
+}
+nav.navbar {
+    color:white;
+    background:rgb(56, 88, 156);
+    padding:0;
+}
+nav ul {
+    /* background:rgb(71, 107, 184); */
+    padding:1%;
+    margin:0;
+    text-align:center;
+}
+footer {
+    text-align:center;
+    padding:1%;
+}
+div#overlay {
+    background:rgba(0,0,0,0.5);
+    position:absolute;
+    z-index:-1;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.container {
+    max-width:80%;
+}
+#instructions {
+    max-width:80%;
+    padding:4%;
+    background:rgb(100,100,100,0.5);
+    border-radius:20px;
+    font-size:25px;
+    margin:4% auto;
+    text-align:center;
+}
+img#loadingSpinner {
+    width:32px;
+    height:32px;
+    animation:rotating 4s linear 0s infinite reverse;
+}
+@keyframes rotating {
+    from{transform:rotate(360deg)};
+    to{transform:rotate(360deg)};
+}
+div.optionId {
+    margin:3% auto;
+}

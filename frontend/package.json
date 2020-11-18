@@ -1,0 +1,19 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "zZ# Frontend",
+  "main": "index.js",
+  "dependencies": {
+    "datatables": "^1.10.18",
+    "http-server": "^0.12.1",
+    "jquery": "^3.5.0",
+    "jquery-ui": "^1.12.1",
+    "jqueryui": "^1.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "npx http-server"
+  },
+  "author": "",
+  "license": "ISC"
+}

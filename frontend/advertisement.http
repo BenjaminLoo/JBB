@@ -1,0 +1,125 @@
+@url = http://localhost:3000/basic/insert
+@httpMethod = POST
+
+# @name EmptyData
+{{httpMethod}} {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"data": []
+}
+
+###
+
+# @name BulkInsert
+
+{{httpMethod}} {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"data": [
+		{
+			"optionId": 1234567890,
+			"companyId": 9999999991,
+			"audienceCount": 237,
+			"cost": 100
+		},
+		{
+			"optionId": 9999999991,
+			"companyId": 9999999991,
+			"audienceCount": 1,
+			"cost": 20
+		},
+		{
+			"optionId": 9999999992,
+			"companyId": 9999999991,
+			"audienceCount": 237,
+			"cost": 13
+		},
+		{
+			"optionId": 9999999993,
+			"companyId": 9999999991,
+			"audienceCount": 858930,
+			"cost": 283
+		},
+		{
+			"optionId": 9999999994,
+			"companyId": 9999999991,
+			"audienceCount": 237,
+			"cost": 19283
+		},
+		{
+			"optionId": 9999999995,
+			"companyId": 9999999991,
+			"audienceCount": 234243,
+			"cost": 239483
+		},
+		{
+			"optionId": 9999999996,
+			"companyId": 9999999992,
+			"audienceCount": 237,
+			"cost": 20391
+		},
+		{
+			"optionId": 9999999997,
+			"companyId": 9999999992,
+			"audienceCount": 23849802,
+			"cost": 20
+		},
+		{
+			"optionId": 9999999998,
+			"companyId": 9999999992,
+			"audienceCount": 237,
+			"cost": 10
+		},
+		{
+			"optionId": 9999999999,
+			"companyId": 9999999992,
+			"audienceCount": 10000000,
+			"cost": 20
+		}
+    ]
+}
+
+###
+
+# @name PartialDuplicate
+
+{{httpMethod}} {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"data": [
+		{
+			"optionId": 9999999999,
+			"companyId": 9999999992,
+			"audienceCount": 10000000,
+			"cost": 20
+		},
+		{
+			"optionId": 1234567891,
+			"companyId": 9999999992,
+			"audienceCount": 10000000,
+			"cost": 20
+		}
+	]
+}
+
+###
+
+# @name InvalidMissingField
+
+{{httpMethod}} {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"data": [
+        {
+            "optionId": 7890223456,
+            "companyId": 1234567890,
+            "cost": 100
+        }
+    ]
+}
+
+###
